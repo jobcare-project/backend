@@ -1,8 +1,9 @@
+const fs = require("fs");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const argon2 = require("argon2");
 
-const { generateToken } = require("../utils/auth-util");
+const { generateToken, generateAccessToken } = require("../utils/auth-util");
 const { returnResponse } = require("../common/response");
 const { statusCode, apiMessage } = require("../utils/constants");
 const {
@@ -97,16 +98,23 @@ const loginService = async (req, res) => {
 
     res.status(statusCode.OK).json(
       returnResponse(true, apiMessage.SUCCESS, {
+        id: user.id,
         fullname: user.fullname,
         email: user.email,
-        id: user.id,
         role: user.role,
+        gender: user.gender,
+        address: user.address,
+        birth: user.birth,
+        phoneNumber: user.phoneNumber,
+        image: user.Image,
         accessToken: tokens.accessToken,
         refreshToken: tokens.refreshToken,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       })
     );
   } catch (error) {
-    console.log(error);
+    console.log("Login Error:", error);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .json(returnResponse(false, apiMessage.SERVER_ERROR));
@@ -176,6 +184,7 @@ const logoutService = async (req, res) => {
 const checkUserService = async (req, res) => {
   try {
     const user = await getUser(req.email);
+
     if (!user) {
       return res
         .status(statusCode.BAD_REQUEST)
@@ -187,7 +196,15 @@ const checkUserService = async (req, res) => {
         id: user.id,
         fullname: user.fullname,
         email: user.email,
+        gender: user.gender,
+        address: user.address,
+        birth: user.birth,
+        phoneNumber: user.phoneNumber,
+        image: user.Image,
         role: user.role,
+        refreshToken: user.refreshToken,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       })
     );
   } catch (error) {
@@ -230,14 +247,14 @@ const refreshTokenService = async (req, res) => {
         .json(returnResponse(false, apiMessage.DATA_FOUND));
     }
 
-    const newTokens = generateToken(userDb);
+    const newTokens = generateAccessToken(userDb);
 
-    // Update refreshToken
-    await updateRefreshToken(userDb, newTokens.refreshToken);
-
-    return res
-      .status(statusCode.OK)
-      .json(returnResponse(true, apiMessage.SUCCESS, newTokens));
+    return res.status(statusCode.OK).json(
+      returnResponse(true, apiMessage.SUCCESS, {
+        ...userDb.dataValues,
+        accessToken: newTokens.accessToken,
+      })
+    );
   } catch (error) {
     console.log(error);
     res

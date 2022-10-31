@@ -55,6 +55,21 @@ const getAllJobsServer = async () => {
     where: {
       isDeleted: false,
     },
+    include: [
+      {
+        model: Users,
+        attributes: {
+          exclude: [
+            "password",
+            "role",
+            "refreshToken",
+            "createdAt",
+            "updatedAt",
+          ],
+        },
+        as: "recruiter_jobs",
+      },
+    ],
   });
   return jobList ? jobList : false;
 };

@@ -12,8 +12,8 @@ const verifyToken = async (req, res, next) => {
 
   if (!token) {
     return res
-      .status(statusCode.UNAUTHORIZED)
-      .json(returnResponse(false, apiMessage.UNAUTHORIZED));
+      .status(statusCode.FORBIDDEN)
+      .json(returnResponse(false, apiMessage.FORBIDDEN));
   }
 
   try {
@@ -26,8 +26,8 @@ const verifyToken = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     return res
-      .status(statusCode.FORBIDDEN)
-      .json(returnResponse(false, apiMessage.FORBIDDEN));
+      .status(statusCode.UNAUTHORIZED)
+      .json(returnResponse(false, apiMessage.UNAUTHORIZED));
   }
 };
 

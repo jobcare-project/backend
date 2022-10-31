@@ -4,6 +4,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 const router = require("./routes");
 
+global.__basedir = __dirname;
+
 const port = process.env.PORT || 5000;
 
 const app = express();

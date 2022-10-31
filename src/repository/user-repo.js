@@ -1,4 +1,4 @@
-const { Users, Jobs } = require("../database/models");
+const { Users, Images } = require("../database/models");
 
 const getUserList = async () => {
   const userList = await Users.findAll();
@@ -10,6 +10,11 @@ const getUser = async (email) => {
     where: {
       email: email,
     },
+    include: [
+      {
+        model: Images,
+      },
+    ],
   });
   return user ? user : false;
 };
