@@ -5,7 +5,7 @@ const argon2 = require("argon2");
 
 const { generateToken, generateAccessToken } = require("../utils/auth-util");
 const { returnResponse } = require("../common/response");
-const { statusCode, apiMessage } = require("../utils/constants");
+const { statusCode, apiMessage, ROLE } = require("../utils/constants");
 const {
   getUser,
   createUser,
@@ -46,6 +46,16 @@ const registerService = async (req, res) => {
       role: role ? role : "user",
       refreshToken: tokens.refreshToken,
     });
+
+    if (role === ROLE.RECRUITER) {
+      return res.status(statusCode.OK).json(
+        returnResponse(true, apiMessage.SUCCESS, {
+          fullname,
+          email,
+          role: role,
+        })
+      );
+    }
 
     return res.status(statusCode.OK).json(
       returnResponse(true, apiMessage.SUCCESS, {

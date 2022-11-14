@@ -31,6 +31,16 @@ const verifyToken = async (req, res, next) => {
   }
 };
 
+const checkAdmin = async (req, res, next) => {
+  if (req.role !== ROLE.ADMIN) {
+    return res
+      .status(statusCode.UNAUTHORIZED)
+      .json(returnResponse(false, apiMessage.UNAUTHORIZED));
+  }
+
+  next();
+};
+
 const checkRecruiter = async (req, res, next) => {
   if (req.role !== ROLE.RECRUITER) {
     return res
@@ -41,7 +51,7 @@ const checkRecruiter = async (req, res, next) => {
   next();
 };
 
-const checkUser = async (req, res, next) => {
+const checkUserRole = async (req, res, next) => {
   if (req.role !== ROLE.USER) {
     return res
       .status(statusCode.UNAUTHORIZED)
@@ -51,4 +61,4 @@ const checkUser = async (req, res, next) => {
   next();
 };
 
-module.exports = { verifyToken, checkRecruiter, checkUser };
+module.exports = { verifyToken, checkRecruiter, checkUserRole, checkAdmin };

@@ -20,6 +20,7 @@ const createJobService = async (req, res) => {
   try {
     const newJob = await createJobServer({
       ...req.body,
+      isDeleted: false,
       recruiterId: recruiterId,
     });
 

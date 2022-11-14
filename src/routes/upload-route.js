@@ -10,5 +10,6 @@ const resizer = require("../middleware/resizer-middleware");
 // @desc Create a new image
 // @access private
 uploadRoutes.post("/", verifyToken, upload, resizer, uploadImage);
+// uploadRoutes.post("/", verifyToken, upload, resizer, uploadImage);
 
 module.exports = uploadRoutes;

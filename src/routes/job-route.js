@@ -19,7 +19,7 @@ const {
 // @access public
 jobRoutes.get("/", getAllJobs);
 
-// @route GET api/job/
+// @route GET api/job/id
 // @desc Get detail 1 job by id
 // @access public
 jobRoutes.get("/:id", getJob);

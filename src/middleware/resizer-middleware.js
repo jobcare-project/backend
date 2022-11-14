@@ -3,6 +3,7 @@ const { returnResponseServerError } = require("../common/response");
 const { statusCode } = require("../utils/constants");
 
 const resizer = async (req, res, next) => {
+  console.log("req-file:::::", req.body.base64image);
   try {
     if (req.file) {
       const imageBuffer = await sharp(req.file.path)

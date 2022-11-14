@@ -17,9 +17,11 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage, fileFilter: imageFilter }).single(
-  "file"
-);
+const upload = multer({
+  storage: storage,
+  limits: { fieldSize: 25 * 1024 * 1024 },
+  fileFilter: imageFilter,
+}).single("file");
 // const upload = multer({ storage: storage }).single("file");
 
 module.exports = upload;

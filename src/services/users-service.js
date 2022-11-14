@@ -1,4 +1,5 @@
 const {
+  getUserList,
   updateProfile,
   getUser,
   getDetailRecruiterServer,
@@ -8,6 +9,21 @@ const {
   returnResponse,
   returnResponseServerError,
 } = require("../common/response");
+
+const getAllUsersService = async (req, res) => {
+  try {
+    const userList = await getUserList();
+
+    return res
+      .status(statusCode.OK)
+      .json(returnResponse(true, apiMessage.SUCCESS, userList));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(statusCode.INTERNAL_SERVER_ERROR)
+      .json(returnResponseServerError());
+  }
+};
 
 const updateUserProfileService = async (req, res) => {
   const { id, email } = req;
@@ -92,4 +108,5 @@ const getDetailRecruiterService = async (req, res) => {
 module.exports = {
   updateUserProfileService,
   getDetailRecruiterService,
+  getAllUsersService,
 };

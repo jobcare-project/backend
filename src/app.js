@@ -3,6 +3,7 @@ require("dotenv").config();
 const cors = require("cors");
 const morgan = require("morgan");
 const router = require("./routes");
+// const bodyParser = require("body-parser");
 
 global.__basedir = __dirname;
 
@@ -23,6 +24,9 @@ app.use(
     parameterLimit: 10000,
   })
 );
+
+// parse application/json
+// app.use(bodyParser.json());
 
 //Enable cors
 app.use(cors());

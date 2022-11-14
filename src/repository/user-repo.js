@@ -1,7 +1,11 @@
 const { Users, Images } = require("../database/models");
 
 const getUserList = async () => {
-  const userList = await Users.findAll();
+  const userList = await Users.findAll({
+    attributes: {
+      exclude: ["password", "refreshToken", "createdAt", "updatedAt"],
+    },
+  });
   return userList ? userList : false;
 };
 
