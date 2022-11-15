@@ -13,6 +13,6 @@ module.exports = {
   password: process.env.DATABASE_PASSWORD,
   port: process.env.DATABASE_PORT,
   database: process.env.DATABASE_NAME,
-  dialect: process.env.DATABASE_DIALECT,
+  dialect: "mysql",
   freezeTableName: true,
 };
