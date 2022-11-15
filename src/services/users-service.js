@@ -63,7 +63,6 @@ const deleteUserService = async (req, res) => {
 
   try {
     const user = await getUserById(userId);
-    console.log("deleteUserService-user::::::", user);
 
     if (!user) {
       return res
