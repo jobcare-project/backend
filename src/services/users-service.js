@@ -1,13 +1,30 @@
 const {
+  getUserList,
   updateProfile,
   getUser,
   getDetailRecruiterServer,
+  getUserById,
 } = require("../repository/user-repo");
 const { statusCode, apiMessage } = require("../utils/constants");
 const {
   returnResponse,
   returnResponseServerError,
 } = require("../common/response");
+
+const getAllUsersService = async (req, res) => {
+  try {
+    const userList = await getUserList();
+
+    return res
+      .status(statusCode.OK)
+      .json(returnResponse(true, apiMessage.SUCCESS, userList));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(statusCode.INTERNAL_SERVER_ERROR)
+      .json(returnResponseServerError());
+  }
+};
 
 const updateUserProfileService = async (req, res) => {
   const { id, email } = req;
@@ -33,6 +50,33 @@ const updateUserProfileService = async (req, res) => {
     return res
       .status(statusCode.OK)
       .json(returnResponse(true, apiMessage.SUCCESS));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(statusCode.INTERNAL_SERVER_ERROR)
+      .json(returnResponseServerError());
+  }
+};
+
+const deleteUserService = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await getUserById(userId);
+
+    if (!user) {
+      return res
+        .status(statusCode.BAD_REQUEST)
+        .json(returnResponse(false, apiMessage.DATA_MISSING));
+    }
+
+    await updateProfile(userId, { isDelete: true });
+
+    const newListUser = await getUserList();
+
+    return res
+      .status(statusCode.OK)
+      .json(returnResponse(true, apiMessage.SUCCESS, newListUser));
   } catch (error) {
     console.log(error);
     return res
@@ -92,4 +136,6 @@ const getDetailRecruiterService = async (req, res) => {
 module.exports = {
   updateUserProfileService,
   getDetailRecruiterService,
+  getAllUsersService,
+  deleteUserService,
 };

@@ -10,17 +10,31 @@ const {
 } = require("../controllers/auth-controller");
 const authRoutes = express.Router();
 
-const { verifyToken } = require("../middleware/auth-middleware");
+const {
+  verifyToken,
+  checkUserRole,
+  checkAdmin,
+} = require("../middleware/auth-middleware");
 
 // @route POST api/auth/register
 // @desc Register a user
 // @access public
 authRoutes.post("/register", register);
 
+// @route POST api/auth/addaccount
+// @desc Register a user
+// @access private
+// authRoutes.post("/addaccount", verifyToken, checkUserRole, register);
+
 // @route POST api/auth/register/recruiter
 // @desc Register a recruiter
 // @access private
-authRoutes.post("/register/recruiter", verifyToken, registerRecruiter);
+authRoutes.post(
+  "/register/recruiter",
+  verifyToken,
+  checkAdmin,
+  registerRecruiter
+);
 
 // @route POST api/auth/login
 // @desc Login a user

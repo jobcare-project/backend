@@ -12,6 +12,7 @@ const register = async (req, res) => {
 };
 
 const registerRecruiter = async (req, res) => {
+  req.body.role = "recruiter";
   return await registerService(req, res);
 };
 

@@ -6,7 +6,7 @@ const generateToken = (payload) => {
     { userId: payload.id, email: payload.email, role: payload.role },
     process.env.ACCESS_TOKEN_SECRET,
     {
-      expiresIn: "2h",
+      expiresIn: "30d",
     }
   );
   const refreshToken = jwt.sign(
@@ -20,4 +20,16 @@ const generateToken = (payload) => {
   return { accessToken, refreshToken };
 };
 
-module.exports = { generateToken };
+const generateAccessToken = (payload) => {
+  const accessToken = jwt.sign(
+    { userId: payload.id, email: payload.email, role: payload.role },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: "30d",
+    }
+  );
+
+  return { accessToken };
+};
+
+module.exports = { generateToken, generateAccessToken };
