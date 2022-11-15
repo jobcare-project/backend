@@ -43,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       phoneNumber: DataTypes.STRING,
       imageId: DataTypes.UUID,
       birth: DataTypes.STRING,
+      isDelete: DataTypes.BOOLEAN,
     },
     {
       sequelize,

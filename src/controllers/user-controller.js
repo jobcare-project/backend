@@ -2,6 +2,7 @@ const {
   updateUserProfileService,
   getDetailRecruiterService,
   getAllUsersService,
+  deleteUserService,
 } = require("../services/users-service");
 
 const getAllUsers = async (req, res) => {
@@ -13,11 +14,15 @@ const updateUserProfile = async (req, res) => {
 };
 
 const assessRecuiter = async (req, res) => {
-  return await assessRecuiterService(req, res);
+  // return await assessRecuiterService(req, res);
 };
 
 const getDetailRecruiter = async (req, res) => {
   return await getDetailRecruiterService(req, res);
+};
+
+const deleteUser = async (req, res) => {
+  return await deleteUserService(req, res);
 };
 
 module.exports = {
@@ -25,4 +30,5 @@ module.exports = {
   assessRecuiter,
   getDetailRecruiter,
   getAllUsers,
+  deleteUser,
 };

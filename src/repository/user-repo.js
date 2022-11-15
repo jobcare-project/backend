@@ -2,6 +2,7 @@ const { Users, Images } = require("../database/models");
 
 const getUserList = async () => {
   const userList = await Users.findAll({
+    where: { isDelete: false },
     attributes: {
       exclude: ["password", "refreshToken", "createdAt", "updatedAt"],
     },
@@ -13,6 +14,23 @@ const getUser = async (email) => {
   const user = await Users.findOne({
     where: {
       email: email,
+    },
+    include: [
+      {
+        model: Images,
+      },
+    ],
+  });
+  return user ? user : false;
+};
+
+const getUserById = async (id) => {
+  const user = await Users.findOne({
+    where: {
+      id: id,
+    },
+    attributes: {
+      exclude: ["password", "refreshToken", "createdAt", "updatedAt"],
     },
     include: [
       {
@@ -96,4 +114,5 @@ module.exports = {
   updateProfile,
   getDetailRecruiterServer,
   getRefreshTokenServer,
+  getUserById,
 };

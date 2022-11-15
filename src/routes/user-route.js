@@ -11,6 +11,7 @@ const {
   assessRecuiter,
   getDetailRecruiter,
   getAllUsers,
+  deleteUser,
 } = require("../controllers/user-controller");
 const upload = require("../middleware/upload-middleware");
 const resizer = require("../middleware/resizer-middleware");
@@ -34,5 +35,10 @@ userRoutes.post("/assess", verifyToken, checkUserRole, assessRecuiter);
 // @desc Get detail of recruiter
 // @access public
 userRoutes.get("/:id", getDetailRecruiter);
+
+// @route DELETE api/user/id
+// @desc Delete a user
+// @access private
+userRoutes.delete("/:id", verifyToken, checkAdmin, deleteUser);
 
 module.exports = userRoutes;
