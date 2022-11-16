@@ -20,4 +20,5 @@ module.exports = {
   username: "b5db21d2b0ccc9",
   password: "857c5514",
   database: "heroku_2805fd3256fbdf7",
+  dialect: "mysql",
 };

@@ -65,6 +65,6 @@ app.all("*", (req, res, next) => {
 });
 
 //listening to port
-app.listen(port, () => {
-  console.log(`Welcome to Sequelize Project running on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Welcome to Sequelize Project running on port ${port}`);
+// });
