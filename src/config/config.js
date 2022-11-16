@@ -8,6 +8,7 @@ if (!process.env.HOST) {
 }
 
 module.exports = {
+  // use_env_variable: process.env.DATABASE_URL,
   host: process.env.DATABASE_HOST,
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
