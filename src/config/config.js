@@ -8,12 +8,12 @@ if (!process.env.HOST) {
 }
 
 module.exports = {
-  // use_env_variable: process.env.DATABASE_URL,
+  use_env_variable: true,
   host: process.env.DATABASE_HOST,
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   port: process.env.DATABASE_PORT,
   database: process.env.DATABASE_NAME,
-  dialect: "mysql",
+  dialect: process.env.DATABASE_DIALECT,
   freezeTableName: true,
 };
