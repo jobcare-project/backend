@@ -16,8 +16,8 @@ module.exports = {
   // database: process.env.DATABASE_NAME,
   // dialect: process.env.DATABASE_DIALECT,
   // freezeTableName: true,
-  HOST: "us-cdbr-east-06.cleardb.net",
-  USER: "b5db21d2b0ccc9",
-  PASSWORD: "857c5514",
-  DB: "heroku_2805fd3256fbdf7",
+  host: "us-cdbr-east-06.cleardb.net",
+  username: "b5db21d2b0ccc9",
+  password: "857c5514",
+  database: "heroku_2805fd3256fbdf7",
 };
