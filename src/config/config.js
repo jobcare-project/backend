@@ -16,6 +16,7 @@ module.exports = {
   // database: process.env.DATABASE_NAME,
   // dialect: process.env.DATABASE_DIALECT,
   // freezeTableName: true,
+  port: process.env.PORT,
   host: "us-cdbr-east-06.cleardb.net",
   username: "b5db21d2b0ccc9",
   password: "857c5514",
