@@ -8,14 +8,14 @@
   },
   "test": {
     "username": "root",
-    "password": 1102,
+    "password": "1102",
     "database": "jobcare",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": 1102,
+    "password": "1102",
     "database": "jobcare",
     "host": "127.0.0.1",
     "dialect": "mysql"
