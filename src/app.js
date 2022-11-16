@@ -34,22 +34,22 @@ app.use(morgan("common"));
 app.use(router);
 
 app.get("/api", (req, res) => {
-  const response = new Response(
-    true,
-    200,
-    `Welcome to Sequelize Project ${port}`
-  );
-  res.status(response.code).json(response);
+  // const response = new Response(
+  //   true,
+  //   200,
+  //   `Welcome to Sequelize Project ${port}`
+  // );
+  res.status(response.code).json({ abc: 123 });
 });
 
 //Handling unhandle routes
 app.all("*", (req, res, next) => {
-  const response = new Response(
-    false,
-    404,
-    `Page not found. Can't find ${req.originalUrl} on this server`
-  );
-  return res.status(response.code).json(response);
+  // const response = new Response(
+  //   false,
+  //   404,
+  //   `Page not found. Can't find ${req.originalUrl} on this server`
+  // );
+  return res.status(404).json({ abc: 456 });
 });
 
 //listening to port
