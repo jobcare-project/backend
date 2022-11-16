@@ -8,11 +8,18 @@ if (!process.env.HOST) {
 }
 
 module.exports = {
-  host: process.env.DATABASE_HOST,
-  username: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  port: process.env.DATABASE_PORT,
-  database: process.env.DATABASE_NAME,
+  // use_env_variable: true,
+  // host: process.env.DATABASE_HOST,
+  // username: process.env.DATABASE_USER,
+  // password: process.env.DATABASE_PASSWORD,
+  // port: process.env.DATABASE_PORT,
+  // database: process.env.DATABASE_NAME,
+  // dialect: process.env.DATABASE_DIALECT,
+  // freezeTableName: true,
+  port: process.env.PORT,
+  host: "us-cdbr-east-06.cleardb.net",
+  username: "b5db21d2b0ccc9",
+  password: "857c5514",
+  database: "heroku_2805fd3256fbdf7",
   dialect: "mysql",
-  freezeTableName: true,
 };
