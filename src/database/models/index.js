@@ -22,8 +22,6 @@ let sequelize;
 //   );
 // }
 
-console.log("config::::::", config);
-
 sequelize = new Sequelize(
   config.database,
   config.username,
