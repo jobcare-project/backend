@@ -1,6 +1,6 @@
 const dotenv = require("dotenv");
 const path = require("path");
-
+// dotenv.config()
 if (!process.env.HOST) {
   dotenv.config({
     path: path.join(__dirname, "..", ".env"),
