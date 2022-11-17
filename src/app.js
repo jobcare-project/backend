@@ -64,7 +64,7 @@ app.all("*", (req, res, next) => {
   return res.status(response.code).json(response);
 });
 
-//listening to port
+//listening to port heroku
 app.listen(port, () => {
   console.log(`Welcome to Sequelize Project running on port ${port}`);
 });
