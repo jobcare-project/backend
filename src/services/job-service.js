@@ -50,6 +50,7 @@ const getAllJobsService = async (req, res) => {
         .status(statusCode.BAD_REQUEST)
         .json(returnResponse(false, apiMessage.DATA_FOUND));
     }
+
     return res
       .status(statusCode.OK)
       .json(returnResponse(true, apiMessage.SUCCESS, jobList));
