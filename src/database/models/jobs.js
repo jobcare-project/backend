@@ -41,6 +41,12 @@ module.exports = (sequelize, DataTypes) => {
       isDeleted: DataTypes.BOOLEAN,
       recruiterId: DataTypes.UUID,
       categoryId: DataTypes.INTEGER,
+      city: DataTypes.STRING,
+      district: DataTypes.STRING,
+      jobRequire: DataTypes.TEXT,
+      jobDescription: DataTypes.TEXT,
+      experience: DataTypes.STRING,
+      department: DataTypes.STRING,
     },
     {
       sequelize,
