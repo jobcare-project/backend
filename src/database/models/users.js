@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       Users.belongsTo(models.Images, {
         foreignKey: "imageId",
       });
+      Users.hasMany(models.SavedRecruitments, {
+        foreignKey: "userId",
+        as: "user_saved_recruitments",
+      });
     }
   }
   Users.init(
