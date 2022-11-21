@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "jobId",
         as: "job_applicants",
       });
+      Jobs.hasOne(models.SavedRecruitments, {
+        foreignKey: "jobId",
+        as: "savedRecruitment_job",
+      });
     }
   }
   Jobs.init(

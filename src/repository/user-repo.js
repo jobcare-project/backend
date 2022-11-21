@@ -58,8 +58,8 @@ const updateRefreshToken = async (user, refreshToken) => {
   return newUser;
 };
 
-const deleteRefreshToken = (userId) => {
-  const userUpdate = Users.update(
+const deleteRefreshToken = async (userId) => {
+  const userUpdate = await Users.update(
     { refreshToken: null },
     {
       where: {
