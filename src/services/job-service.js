@@ -12,6 +12,11 @@ const {
   returnResponseServerError,
 } = require("../common/response");
 const { apiMessage, statusCode } = require("../utils/constants");
+const {
+  saveJobServer,
+  deleteSavedJobServer,
+  getAllSavedJobsServer,
+} = require("../repository/savedRecruitment-repo");
 
 const createJobService = async (req, res) => {
   // Lấy ra thông tin người dùng gửi lên thông qua accessToken
@@ -50,6 +55,7 @@ const getAllJobsService = async (req, res) => {
         .status(statusCode.BAD_REQUEST)
         .json(returnResponse(false, apiMessage.DATA_FOUND));
     }
+
     return res
       .status(statusCode.OK)
       .json(returnResponse(true, apiMessage.SUCCESS, jobList));
@@ -153,27 +159,34 @@ const deleteJobService = async (req, res) => {
   const recruiterId = req.id;
   const jobId = req.params.id;
 
-  // Kiểm tra xem id của người dùng và id của Job có trùng khớp nhau không
-  // Nếu trùng khớp mới cho người dùng sửa Job này
-  const job = await getJobServer(jobId);
+  try {
+    // Kiểm tra xem id của người dùng và id của Job có trùng khớp nhau không
+    // Nếu trùng khớp mới cho người dùng sửa Job này
+    const job = await getJobServer(jobId);
 
-  if (recruiterId !== job.recruiterId) {
+    if (recruiterId !== job.recruiterId) {
+      return res
+        .status(statusCode.UNAUTHORIZED)
+        .json(false, apiMessage.UNAUTHORIZED);
+    }
+
+    const idDeleted = await updateJobServer(jobId, { isDeleted: true });
+
+    if (!idDeleted) {
+      return res
+        .status(statusCode.BAD_REQUEST)
+        .json(returnResponse(false, apiMessage.DATA_FOUND));
+    }
+
     return res
-      .status(statusCode.UNAUTHORIZED)
-      .json(false, apiMessage.UNAUTHORIZED);
-  }
-
-  const idDeleted = await updateJobServer(jobId, { isDeleted: true });
-
-  if (!idDeleted) {
+      .status(statusCode.OK)
+      .json(returnResponse(true, apiMessage.SUCCESS));
+  } catch (error) {
+    console.log(error);
     return res
-      .status(statusCode.BAD_REQUEST)
-      .json(returnResponse(false, apiMessage.DATA_FOUND));
+      .status(statusCode.INTERNAL_SERVER_ERROR)
+      .json(returnResponseServerError());
   }
-
-  return res
-    .status(statusCode.OK)
-    .json(returnResponse(true, apiMessage.SUCCESS));
 };
 
 module.exports = {
