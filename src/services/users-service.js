@@ -111,7 +111,7 @@ const deleteUserService = async (req, res) => {
 // };
 
 const getDetailRecruiterService = async (req, res) => {
-  const recruiterId = +req.params.id;
+  const recruiterId = req.params.id;
 
   try {
     const recruiterDetails = await getDetailRecruiterServer(recruiterId);
