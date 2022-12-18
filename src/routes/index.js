@@ -7,6 +7,7 @@ const applicantsRoutes = require("./applicants-route");
 const uploadRoutes = require("./upload-route");
 const registeredTrialRoutes = require("./registeredTrial-route");
 const savedRecruitmentRoutes = require("./savedRecruitment-route");
+const chartRoutes = require("./chart-route");
 const searchRoutes = require("./search-route");
 
 const router = express.Router();
@@ -19,6 +20,7 @@ router.use("/api/applicants", applicantsRoutes);
 router.use("/api/upload", uploadRoutes);
 router.use("/api/registertrial", registeredTrialRoutes);
 router.use("/api/saved-recruitment", savedRecruitmentRoutes);
+router.use("/api/chart", chartRoutes);
 router.use("/api/search", searchRoutes);
 
 module.exports = router;
