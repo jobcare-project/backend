@@ -19,9 +19,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId",
         as: "user_applicants",
       });
-      Users.belongsTo(models.Images, {
-        foreignKey: "imageId",
-      });
+      // Users.belongsTo(models.Images, {
+      //   foreignKey: "imageId",
+      // });
       Users.hasMany(models.SavedRecruitments, {
         foreignKey: "userId",
         as: "user_saved_recruitments",
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       gender: DataTypes.BOOLEAN,
       address: DataTypes.STRING,
       phoneNumber: DataTypes.STRING,
-      imageId: DataTypes.UUID,
+      imageUrl: DataTypes.STRING,
       birth: DataTypes.STRING,
       isDelete: DataTypes.BOOLEAN,
     },

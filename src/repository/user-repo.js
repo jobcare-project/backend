@@ -1,4 +1,4 @@
-const { Users, Images } = require("../database/models");
+const { Users } = require("../database/models");
 
 const getUserList = async () => {
   const userList = await Users.findAll({
@@ -15,11 +15,6 @@ const getUser = async (email) => {
     where: {
       email: email,
     },
-    include: [
-      {
-        model: Images,
-      },
-    ],
   });
   return user ? user : false;
 };
@@ -32,11 +27,6 @@ const getUserById = async (id) => {
     attributes: {
       exclude: ["password", "refreshToken", "createdAt", "updatedAt"],
     },
-    include: [
-      {
-        model: Images,
-      },
-    ],
   });
   return user ? user : false;
 };
@@ -76,7 +66,7 @@ const updateProfile = async (userId, payload) => {
       id: userId,
     },
   });
-  return newUserProfile;
+  return newUserProfile ? newUserProfile : false;
 };
 
 const getDetailRecruiterServer = async (recruiterId) => {

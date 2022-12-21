@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       coverLetter: DataTypes.TEXT,
       jobId: DataTypes.UUID,
       userId: DataTypes.UUID,
-      imageId: DataTypes.UUID,
+      imageUrl: DataTypes.STRING,
     },
     {
       sequelize,

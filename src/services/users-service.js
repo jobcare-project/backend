@@ -46,10 +46,11 @@ const updateUserProfileService = async (req, res) => {
     };
 
     await updateProfile(id, data);
+    const newUserData = await getUser(email);
 
     return res
       .status(statusCode.OK)
-      .json(returnResponse(true, apiMessage.SUCCESS));
+      .json(returnResponse(true, apiMessage.SUCCESS, newUserData));
   } catch (error) {
     console.log(error);
     return res

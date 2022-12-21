@@ -210,7 +210,7 @@ const checkUserService = async (req, res) => {
         address: user.address,
         birth: user.birth,
         phoneNumber: user.phoneNumber,
-        image: user.Image,
+        imageUrl: user.imageUrl,
         role: user.role,
         refreshToken: user.refreshToken,
         createdAt: user.createdAt,
