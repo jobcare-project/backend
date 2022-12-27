@@ -30,6 +30,8 @@ module.exports = (sequelize, DataTypes) => {
       coverLetter: DataTypes.TEXT,
       jobId: DataTypes.UUID,
       userId: DataTypes.UUID,
+      recruiterId: DataTypes.UUID,
+      isDeleted: DataTypes.BOOLEAN,
       imageUrl: DataTypes.STRING,
     },
     {
