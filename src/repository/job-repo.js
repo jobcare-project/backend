@@ -22,7 +22,6 @@ const getJobServer = async (jobId) => {
             "updatedAt",
           ],
         },
-
         as: "recruiter_jobs",
       },
     ],

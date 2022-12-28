@@ -1,4 +1,4 @@
-const { Applicants } = require("../database/models");
+const { Applicants, Users, Jobs } = require("../database/models");
 
 const applyJobsServer = async (data) => {
   const newApplyJobs = await Applicants.create(data);
@@ -11,6 +11,30 @@ const getCandidatesByRecruiterIdServer = async (recruiterId) => {
     attributes: {
       exclude: ["ImageId", "updatedAt", "isDeleted"],
     },
+    // include: ["job_applicants", "user_applicants"],
+    include: [
+      {
+        model: Users,
+        attributes: {
+          exclude: [
+            "password",
+            "role",
+            "refreshToken",
+            "createdAt",
+            "updatedAt",
+            "isDelete",
+          ],
+        },
+        as: "user_applicants",
+      },
+      {
+        model: Jobs,
+        attributes: {
+          exclude: ["isDeleted"],
+        },
+        as: "job_applicants",
+      },
+    ],
   });
   return candidates ? candidates : false;
 };

@@ -1,4 +1,4 @@
-const { Users } = require("../database/models");
+const { Users, Jobs, Assess } = require("../database/models");
 
 const getUserList = async () => {
   const userList = await Users.findAll({
@@ -77,7 +77,19 @@ const getDetailRecruiterServer = async (recruiterId) => {
     attributes: {
       exclude: ["password", "refreshToken", "createdAt", "updatedAt"],
     },
-    include: ["recruiter_jobs", "recruiter_assess"],
+    include: [
+      {
+        model: Jobs,
+        where: {
+          isDeleted: false,
+        },
+        as: "recruiter_jobs",
+      },
+      {
+        model: Assess,
+        as: "recruiter_assess",
+      },
+    ],
   });
   return recruiterDetails ? recruiterDetails : false;
 };
