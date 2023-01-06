@@ -121,6 +121,7 @@ const loginService = async (req, res) => {
         refreshToken: tokens.refreshToken,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
+        imageUrl: user.imageUrl,
       })
     );
   } catch (error) {

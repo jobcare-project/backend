@@ -20,12 +20,12 @@ const getStatisticalApp = async () => {
   const jobCount = await Jobs.count({
     where: {
       createdAt: sequelize.where(
-        sequelize.fn("YEAR", sequelize.col("createdAt")),
-        "2022"
+        sequelize.fn("MONTH", sequelize.col("createdAt")),
+        "01"
       ),
     },
-    attributes: [[sequelize.fn("MONTH", sequelize.col("createdAt")), "month"]],
-    group: ["month"],
+    attributes: [[sequelize.fn("DAY", sequelize.col("createdAt")), "day"]],
+    group: ["day"],
   });
 
   return { jobCount };

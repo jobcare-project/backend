@@ -6,6 +6,7 @@ const {
   saveRecruitmentServer,
   deleteSavedRecruitmentServer,
   getAllSavedRecruitmentsServer,
+  checkSavedRecruitmentByUserIdandJobId,
 } = require("../repository/savedRecruitment-repo");
 const { statusCode, apiMessage } = require("../utils/constants");
 
@@ -13,7 +14,28 @@ const saveRecruitmentService = async (req, res) => {
   const userId = req.id;
   const { jobId } = req.body;
 
+  if (!userId) {
+    return res
+      .status(statusCode.BAD_REQUEST)
+      .json(returnResponse(false, apiMessage.UNAUTHORIZED));
+  }
+
   try {
+    const savedRecruitmentInDatabase =
+      await checkSavedRecruitmentByUserIdandJobId(userId, jobId);
+
+    if (savedRecruitmentInDatabase) {
+      const isDeleted = await deleteSavedRecruitmentServer(
+        savedRecruitmentInDatabase.dataValues.id
+      );
+      if (isDeleted) {
+        return res
+          .status(statusCode.OK)
+          .json(returnResponse(true, apiMessage.SUCCESS));
+      }
+      return;
+    }
+
     const savedRecruitment = await saveRecruitmentServer({ userId, jobId });
 
     if (!savedRecruitment) {

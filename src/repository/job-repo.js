@@ -1,4 +1,9 @@
-const { Jobs, Users, JobCategories } = require("../database/models");
+const {
+  Jobs,
+  Users,
+  JobCategories,
+  SavedRecruitments,
+} = require("../database/models");
 
 const createJobServer = async (data) => {
   const newJob = await Jobs.create(data);
