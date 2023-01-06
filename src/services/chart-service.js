@@ -13,6 +13,14 @@ const getAdminChartService = async (req, res) => {
     const { userCount, recruiterCount } = await getCounterUser();
     const statisticalApp = await getStatisticalApp();
 
+    const statisticalAppSort = statisticalApp.jobCount.sort(
+      (a, b) => a.day - b.day
+    );
+    // console.log(
+    //   "statisticalApp",
+    //   statisticalApp.jobCount.sort((a, b) => a.day - b.day)
+    // );
+
     const data = {
       doughnut: {
         labels: ["Người dùng", "Nhà tuyển dụng"],
@@ -25,7 +33,7 @@ const getAdminChartService = async (req, res) => {
       },
       lines: {
         label: "Thống kê số lượng tin tuyển dụng",
-        ...statisticalApp,
+        jobCount: [...statisticalAppSort],
       },
     };
 
